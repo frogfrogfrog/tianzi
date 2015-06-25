@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
+        android:minSdkVersion="10"
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,19 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        
+         <activity android:name=".level.ChoiceViewActivity"
+                  android:label="@string/app_name">
+            
+        </activity>
+           <activity android:name=".level.Test"
+				android:label="@string/app_name">
+		</activity>
     </application>
 
 </manifest>
