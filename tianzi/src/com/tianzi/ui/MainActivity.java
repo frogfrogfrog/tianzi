@@ -1,7 +1,8 @@
-package com.example.tianzi;
+package com.tianzi.ui;
 
 
-import com.example.tianzi.level.ChoiceViewActivity;
+import com.example.tianzi.R;
+import com.example.tianzi.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;

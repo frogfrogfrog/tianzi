@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.tianzi.ui.MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
         
-         <activity android:name=".level.ChoiceViewActivity"
+         <activity android:name="com.tianzi.ui.ChoiceViewActivity"
                   android:label="@string/app_name">
             
         </activity>
-           <activity android:name=".level.Test"
+           <activity android:name="com.tianzi.ui.Test"
 				android:label="@string/app_name">
 		</activity>
     </application>

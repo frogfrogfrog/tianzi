@@ -1,8 +1,8 @@
-package com.example.tianzi.level;
+package com.tianzi.ui;
 
 
 import com.example.tianzi.R;
-import com.example.tianzi.level.MyAdapter.MyOnItemClickListener;
+import com.tianzi.ui.MyAdapter.MyOnItemClickListener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,17 +23,17 @@ public class ChoiceViewActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     // È¡Ïû±êÌâ
+     // È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// ½ûÖ¹ÆÁÄ»ÐÝÃß
+		// ï¿½ï¿½Ö¹ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		// È«ÆÁÄ»
+		// È«ï¿½ï¿½Ä»
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.level_main);
         Gallery g=(Gallery)findViewById(R.id.gallery);
-        g.setAdapter(new MyAdapter(ChoiceViewActivity.this));//ÉèÖÃmyAdapter 
+        g.setAdapter(new MyAdapter(ChoiceViewActivity.this));//ï¿½ï¿½ï¿½ï¿½myAdapter 
         registerForContextMenu(g);
         
    //     g.setOnItemClickListener(new MyOnItemClickListener());

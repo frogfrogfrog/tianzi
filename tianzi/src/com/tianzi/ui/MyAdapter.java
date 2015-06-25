@@ -1,4 +1,4 @@
-package com.example.tianzi.level;
+package com.tianzi.ui;
 
 
 import com.example.tianzi.R;
@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MyAdapter extends BaseAdapter{
-	 //Í¼Æ¬idÊý×é   
+	 //Í¼Æ¬idï¿½ï¿½ï¿½ï¿½   
     private Integer[] imgs={   
             R.drawable.level_button,   
             R.drawable.level_button,   
@@ -44,30 +44,30 @@ public class MyAdapter extends BaseAdapter{
     		R.drawable.level_back3,
     		
     };
-    //ÉÏÏÂÎÄ¶ÔÏó   
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½   
     Context context;   
-    //¹¹Ôì·½·¨   
+    //ï¿½ï¿½ï¿½ì·½ï¿½ï¿½   
     MyAdapter(Context context)   
     {   
         this.context=context;   
     }   
-    //»ñµÃÊýÁ¿   
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   
     public int getCount()   
     {   
         return backImgs.length;   
     }   
-    //»ñµÃµ±Ç°Ñ¡Ïî   
+    //ï¿½ï¿½Ãµï¿½Ç°Ñ¡ï¿½ï¿½   
     public Object getItem(int item)   
     {   
         return item;   
     }   
-    //»ñµÃµ±Ç°Ñ¡Ïîid   
+    //ï¿½ï¿½Ãµï¿½Ç°Ñ¡ï¿½ï¿½id   
     public long getItemId(int id)   
     {   
         return id;   
     }   
        
-    //´´½¨View·½·¨   
+    //ï¿½ï¿½ï¿½ï¿½Viewï¿½ï¿½ï¿½ï¿½   
     public View getView(int position,View convertView,ViewGroup parent)   
     {   
     	LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.level_linearlayout, null);
@@ -96,17 +96,17 @@ public class MyAdapter extends BaseAdapter{
     
     class ImageAdapter extends BaseAdapter{
     	
-    	 //»ñµÃÊýÁ¿   
+    	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   
         public int getCount()   
         {   
             return imgs.length;   
         }   
-        //»ñµÃµ±Ç°Ñ¡Ïî   
+        //ï¿½ï¿½Ãµï¿½Ç°Ñ¡ï¿½ï¿½   
         public Object getItem(int item)   
         {   
             return item;   
         }   
-        //»ñµÃµ±Ç°Ñ¡Ïîid   
+        //ï¿½ï¿½Ãµï¿½Ç°Ñ¡ï¿½ï¿½id   
         public long getItemId(int id)   
         {   
             return id;   
@@ -117,22 +117,22 @@ public class MyAdapter extends BaseAdapter{
 			ImageView imageView=null;   
 	        if(convertView==null)   
 	        {   
-	            //ÊµÀý»¯ImageView¶ÔÏó   
+	            //Êµï¿½ï¿½ï¿½ï¿½ImageViewï¿½ï¿½ï¿½ï¿½   
 	        	imageView=new ImageView(context);  
-	            //ÉèÖÃImageView¶ÔÏó²¼¾Ö   
+	            //ï¿½ï¿½ï¿½ï¿½ImageViewï¿½ï¿½ï¿½ó²¼¾ï¿½   
 	        	imageView.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.FILL_PARENT));
-	            //ÉèÖÃ±ß½ç¶ÔÆë   
+	            //ï¿½ï¿½ï¿½Ã±ß½ï¿½ï¿½ï¿½ï¿½   
 	        	imageView.setAdjustViewBounds(false);   
-	            //ÉèÖÃ¿Ì¶ÈÀàÐÍ   
+	            //ï¿½ï¿½ï¿½Ã¿Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½   
 	        	imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-	            //ÉèÖÃ¼ä¾à   
+	            //ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½   
 	        	imageView.setPadding(30,30,30,30); 
 //	        	button.setText(""+position);
 	        }else  
 	        {   
 	        	imageView=(ImageView)convertView;   
 	        }   
-	        //ÎªImageViewÉèÖÃÍ¼Æ¬×ÊÔ´   
+	        //ÎªImageViewï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ô´   
 //	        button.setBackgroundResource(R.drawable.button);   
 	        imageView.setImageResource(R.drawable.level_button);
 //	        imageView.setOnClickListener(new View.OnClickListener() {
