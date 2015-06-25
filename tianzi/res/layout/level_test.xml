@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     style="@style/layout_full"
+	android:orientation="vertical"
+	>
+	
+  	<LinearLayout
+  	    style="@style/layout_vertical"
+  	     android:layout_weight="1"
+  	    android:orientation="horizontal" >
+     
+             <TextView 
+		    style="@style/layout_horizontal"
+    		android:text="城市:"
+    		android:textSize="10pt"
+    		android:layout_weight="1"
+    		/>    
+             
+            <TextView 
+		    style="@style/layout_horizontal"
+    		android:id="@+id/data1" 
+    		android:textSize="15pt"
+    		android:layout_weight="1"
+    		/>      
+  	 </LinearLayout>    
+  
+    
+</LinearLayout> 

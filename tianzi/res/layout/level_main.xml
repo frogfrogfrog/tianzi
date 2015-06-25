@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	
+    <LinearLayout 
+        style="@style/layout_full"
+        android:orientation="vertical"
+        android:background="@drawable/homeback">
+	<LinearLayout 
+                style="@style/layout_vertical"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+		<Button 
+			android:id="@+id/button"
+			style="@style/layout_horizontal"
+            android:layout_weight="1"
+			android:background="@drawable/buttonseloctor"
+			android:text="返回"
+		/>
+
+		<Button
+		    android:id="@+id/title"
+			style="@style/layout_horizontal"
+			android:layout_weight="4"
+			android:text="关卡"
+			android:background="@android:color/transparent"
+		    />	
+		 <Button
+			style="@style/layout_horizontal"
+			android:layout_weight="1"
+			android:background="@android:color/transparent"
+		    />	
+	</LinearLayout>
+
+	
+	<LinearLayout 
+	    		style="@style/layout_vertical"
+                android:layout_weight="10"
+                android:orientation="horizontal">
+		<Gallery android:id="@+id/gallery" 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"/>
+	</LinearLayout>	
+	
+	
+	</LinearLayout>
+</FrameLayout>
