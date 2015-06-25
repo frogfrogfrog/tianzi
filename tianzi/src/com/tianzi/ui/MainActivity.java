@@ -13,6 +13,7 @@ import android.view.MenuItem;
 public class MainActivity extends Activity {
 
 	@Override 
+	//xmr12 2015.6.25
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
