@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
 
 	@Override 
 	//xmr12 2015.6.25
+	//zjw12
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
