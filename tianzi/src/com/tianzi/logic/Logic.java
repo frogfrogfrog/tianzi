@@ -30,4 +30,10 @@ public interface Logic {
 	 */
 	public void saveGameRecord();
 	
+	
+	/**
+	 * 判断关卡是否已经通过
+	 * @return 
+	 */
+	public boolean[] levelIsChieved();
 }

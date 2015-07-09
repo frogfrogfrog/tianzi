@@ -177,5 +177,10 @@ public class LogicImpl implements Logic{
 			resultCD.addAll(temp);
 		}
 	}
+	@Override
+	public boolean[] levelIsChieved() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
