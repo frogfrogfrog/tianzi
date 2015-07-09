@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    
+    <Button
+        android:id="@+id/game_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="返回"
+        />
+    
+    <TextView
+        android:id="@+id/level_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12sp"
+        android:text="第1关" />
+    
+    <Button
+        android:id="@+id/game_pause_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="暂停"/>
+    
+    <TextView
+        android:id="@+id/coin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/game_pause_button"
+        android:layout_marginTop="12sp"
+        android:text="金币：200" 
+        android:background="@drawable/game_bg_border"/>
+    
+    <TextView 
+        android:id="@+id/game_textview_question"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_back_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="8sp"
+        android:layout_marginRight="8sp"
+        android:layout_marginTop="12sp"
+        android:background="@drawable/game_bg_border"
+        android:textSize="50sp"/>
+    
+    <GridView
+        android:id="@+id/game_gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_textview_question"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp"
+        android:layout_marginTop="12sp"
+        android:horizontalSpacing="5px"
+        android:verticalSpacing="5px"
+        android:gravity="center"
+        android:numColumns="10"/>
+
+    <TableLayout 
+        android:id="@+id/game_tablelayout"
+        android:layout_below="@id/game_gridview"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12sp"
+        android:layout_marginLeft="8sp"
+        android:layout_marginRight="8sp">
+    </TableLayout>       
+  
+
+
+   
+    
+                
+</RelativeLayout>
+ 

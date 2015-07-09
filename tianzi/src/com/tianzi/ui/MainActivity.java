@@ -1,8 +1,8 @@
 package com.tianzi.ui;
 
 
+
 import com.example.tianzi.R;
-import com.example.tianzi.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +18,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Intent intent=new Intent(MainActivity.this,ChoiceViewActivity.class);
+//		Intent intent=new Intent(MainActivity.this,ChoiceViewActivity.class);
+//    	startActivity(intent);
+		Intent intent=new Intent(MainActivity.this,GameActivity.class);
     	startActivity(intent);
 	}
 }
