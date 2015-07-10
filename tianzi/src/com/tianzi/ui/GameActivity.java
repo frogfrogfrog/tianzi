@@ -9,6 +9,7 @@ import com.tianzi.logic.*;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -79,8 +80,11 @@ public class GameActivity extends Activity {
 				if(currentPosition>=0){
 					CellData temp = cellList.get(currentPosition);
 					if(temp.getState()==2||temp.getState()==1){
-						resultData = logic.enterWord(currentPosition/10, currentPosition%10, word[position]);
+						
 						cellList.get(currentPosition).setWord(word[position]);
+						Log.v("xmr12", "从键盘输入了"+word[position]);
+						cellList.get(currentPosition).setState(2);
+						resultData = logic.enterWord(currentPosition/10, currentPosition%10, word[position]);
 						if(resultData.getIsCorrect()){
 							ArrayList<CellData> ansList = resultData.getCellData();
 							for(CellData ans:ansList){

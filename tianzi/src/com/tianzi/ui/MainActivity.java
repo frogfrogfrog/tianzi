@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,10 +27,8 @@ public class MainActivity extends Activity {
 //		Intent intent=new Intent(MainActivity.this,GameActivity.class);
 //    	startActivity(intent);
 //	}
-	Button logo;
 	Button start;
 	Button help;
-	Button about;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +41,19 @@ public class MainActivity extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.begin);
-        logo=(Button)findViewById(R.id.begin_logo);
         start=(Button)findViewById(R.id.begin_start);
+        start.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	        	Intent intent=new Intent(MainActivity.this,ChoiceViewActivity.class);
+	        	startActivity(intent);
+	        	        }
+	        	    });
         help=(Button)findViewById(R.id.begin_help);
-        Intent intent=new Intent(MainActivity.this,GameActivity.class);
-    	startActivity(intent);
+        help.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	        	Intent intent=new Intent(MainActivity.this,Help.class);
+	        	startActivity(intent);
+	        	        }
+	        	    });
     }
 }

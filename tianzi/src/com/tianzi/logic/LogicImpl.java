@@ -54,12 +54,11 @@ public class LogicImpl implements Logic{
 			return null;
 		}	
 		ResultData result=new ResultData();
-		ArrayList<CellData> temp=new ArrayList<CellData>();
-		temp.add(cdList[x][y]);
 		
 		ArrayList<CellData> resultCD=new ArrayList<CellData>();
 		if(coordinate[x][y][1]>=0){
 			//填的这个字处于一个横问题中
+			ArrayList<CellData> temp=new ArrayList<CellData>();
 			int flag=1;
 			for(int i=0;i<10-y;i++){
 				if(cdList[x][y+i].getState()==2){
@@ -98,13 +97,18 @@ public class LogicImpl implements Logic{
 			}
 			if(flag==1){
 				//该题目的所以格子都填了英文答案。
-				judgeAnsIsCorrect(resultCD, temp);
+				//该题目的所以格子都填了英文答案。
+				if(judgeAnsIsCorrect(resultCD, temp)){
+					result.setIsCorrect(true);
+					result.setIsEnd(this.judgeIsEnd());
+				}
 			}
 		}
 		if(coordinate[x][y][2]>=0){
 			//填的这个字处于一个纵问题中
+			ArrayList<CellData> temp=new ArrayList<CellData>();
 			int flag=1;
-			for(int i=0;i<10-y;i++){
+			for(int i=0;i<10-x;i++){
 				if(cdList[x+i][y].getState()==2){
 					//说明 第[x+i][y]也填了英文答案
 					temp.add(cdList[x+i][y]);
@@ -122,7 +126,7 @@ public class LogicImpl implements Logic{
 			}
 			if(flag==1){
 				//说明xy下边的格子都已经填了英文字母答案，现在遍历上边的格子
-				for(int i=1;i<y+1;i++){
+				for(int i=1;i<x+1;i++){
 					if(cdList[x-i][y].getState()==2){
 						//说明 第[x-i][y]也填了英文答案
 						temp.add(cdList[x-i][y]);
@@ -147,22 +151,24 @@ public class LogicImpl implements Logic{
 				}
 			}
 		}
+		
 		if(resultCD.size()==0){
 			//说明要么答案没填完，要么不对
-			int nextX = 0;
-			int nextY = 0;
-			if(coordinate[x][y][1]>=0 && cdList[x][y+1].getState()==1){
-				nextX=x;
-				nextY=y+1;
+			int nextX = x;
+			int nextY = y;
+			if(coordinate[x][y][1]>=0){
+				if(y!=9 && cdList[x][y+1].getState()==1){
+					nextY=y+1;
+				}
 			}
-			if(coordinate[x][y][2]>=0 && cdList[x+1][y].getState()==1){
-				nextX=x+1;
-				nextY=y;
+			if(coordinate[x][y][2]>=0 ){
+				if(x!=9 && cdList[x+1][y].getState()==1){
+					nextX=x+1;
+				}
 			}
 			result.setNextX(nextX);
 			result.setNextY(nextY);
 		}
-		
 		
 		for(CellData cd:resultCD){
 			Log.v("yzx12", String.valueOf(cd.getWord()));

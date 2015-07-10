@@ -40,6 +40,12 @@ public class ChoiceViewActivity extends Activity {
         
         Button button=(Button)findViewById(R.id.level_button);
     	button.setBackgroundResource(R.drawable.buttonseloctor);
+    	button.setOnClickListener(new View.OnClickListener() {
+	        public void onClick(View v) {
+	        	Intent intent=new Intent(ChoiceViewActivity.this,MainActivity.class);
+	        	startActivity(intent);
+	        	        }
+	        	    });
     }
     
     @Override

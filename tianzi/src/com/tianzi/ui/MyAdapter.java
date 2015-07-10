@@ -41,7 +41,7 @@ public class MyAdapter extends BaseAdapter{
     		
     
     }; 
-	 //图片id锟斤拷锟斤拷   
+	 //鍥剧墖id閿熸枻鎷烽敓鏂ゆ嫹   
     private Integer[] imgs={   
             R.drawable.level_button1,  
             R.drawable.level_button2, 
@@ -84,32 +84,32 @@ public class MyAdapter extends BaseAdapter{
 //    		R.drawable.testback1,
     		
     };
-    //锟斤拷锟斤拷锟侥讹拷锟斤拷   
+    //閿熸枻鎷烽敓鏂ゆ嫹閿熶茎璁规嫹閿熸枻鎷�  
     Context context;   
-    //锟斤拷锟届方锟斤拷   
+    //閿熸枻鎷烽敓灞婃柟閿熸枻鎷�  
     MyAdapter(Context context)   
     {   
         this.context=context;  
         Logic go=new LogicImpl();
         result=go.levelIsChieved();
     }   
-    //锟斤拷锟斤拷锟斤拷锟�  
+    //閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟� 
     public int getCount()   
     {   
         return backImgs.length;   
     }   
-    //锟斤拷玫锟角把★拷锟�  
+    //閿熸枻鎷风帿閿熻鎶娾槄鎷烽敓锟� 
     public Object getItem(int item)   
     {   
         return item;   
     }   
-    //锟斤拷玫锟角把★拷锟絠d   
+    //閿熸枻鎷风帿閿熻鎶娾槄鎷烽敓绲燿   
     public long getItemId(int id)   
     {   
         return id;   
     }   
        
-    //锟斤拷锟斤拷View锟斤拷锟斤拷   
+    //閿熸枻鎷烽敓鏂ゆ嫹View閿熸枻鎷烽敓鏂ゆ嫹   
     public View getView(int position,View convertView,ViewGroup parent)   
     {   
     	LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.level_linearlayout, null);
@@ -156,7 +156,7 @@ public class MyAdapter extends BaseAdapter{
 			Bundle data=new Bundle();
 			//data.putInt("level", arg2+1);
 			data.putString("city", String.valueOf(arg2+1));
-        	Intent intent=new Intent(context,Test.class);
+        	Intent intent=new Intent(context,GameActivity.class);
         	intent.putExtras(data);
         	context.startActivity(intent);
 		}
@@ -169,7 +169,7 @@ public class MyAdapter extends BaseAdapter{
  			Bundle data=new Bundle();
 //         	data.putInt("level", arg2+10);
  			data.putString("city", String.valueOf(arg2+10));
-         	Intent intent=new Intent(context,Test.class);
+         	Intent intent=new Intent(context,GameActivity.class);
          	intent.putExtras(data);
          	context.startActivity(intent);
  			}
@@ -181,7 +181,7 @@ public class MyAdapter extends BaseAdapter{
  			Bundle data=new Bundle();
  			//data.putInt("level", arg2+19);
  			data.putString("city", String.valueOf(arg2+19));
-         	Intent intent=new Intent(context,Test.class);
+         	Intent intent=new Intent(context,GameActivity.class);
          	intent.putExtras(data);
          	context.startActivity(intent);
  			}
@@ -190,17 +190,17 @@ public class MyAdapter extends BaseAdapter{
     
     class ImageAdapter extends BaseAdapter{
     	
-    	 //锟斤拷锟斤拷锟斤拷锟�  
+    	 //閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟� 
         public int getCount()   
         {   
             return imgs.length;   
         }   
-        //锟斤拷玫锟角把★拷锟�  
+        //閿熸枻鎷风帿閿熻鎶娾槄鎷烽敓锟� 
         public Object getItem(int item)   
         {   
             return item;   
         }   
-        //锟斤拷玫锟角把★拷锟絠d   
+        //閿熸枻鎷风帿閿熻鎶娾槄鎷烽敓绲燿   
         public long getItemId(int id)   
         {   
             return id;   
@@ -213,22 +213,22 @@ public class MyAdapter extends BaseAdapter{
 			
 	        if(convertView==null)   
 	        {   
-	            //实锟斤拷锟斤拷ImageView锟斤拷锟斤拷   
+	            //瀹為敓鏂ゆ嫹閿熸枻鎷稩mageView閿熸枻鎷烽敓鏂ゆ嫹   
 	        	imageView=new ImageView(context);  
-	            //锟斤拷锟斤拷ImageView锟斤拷锟襟布撅拷   
+	            //閿熸枻鎷烽敓鏂ゆ嫹ImageView閿熸枻鎷烽敓瑗熷竷鎾呮嫹   
 	        	imageView.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.FILL_PARENT));
-	            //锟斤拷锟矫边斤拷锟斤拷锟�  
+	            //閿熸枻鎷烽敓鐭竟鏂ゆ嫹閿熸枻鎷烽敓锟� 
 	        	imageView.setAdjustViewBounds(false);   
-	            //锟斤拷锟矫刻讹拷锟斤拷锟斤拷   
+	            //閿熸枻鎷烽敓鐭埢璁规嫹閿熸枻鎷烽敓鏂ゆ嫹   
 	        	imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-	            //锟斤拷锟矫硷拷锟�  
+	            //閿熸枻鎷烽敓鐭》鎷烽敓锟� 
 	        	imageView.setPadding(20,20,20,20); 
 //	        	button.setText(""+position);
 	        }else  
 	        {   
 	        	imageView=(ImageView)convertView;   
 	        }   
-	        //为ImageView锟斤拷锟斤拷图片锟斤拷源   
+	        //涓篒mageView閿熸枻鎷烽敓鏂ゆ嫹鍥剧墖閿熸枻鎷锋簮   
 //	        button.setBackgroundResource(R.drawable.button); 
 	        imageView.setImageResource(imgs[position]);
 	        
