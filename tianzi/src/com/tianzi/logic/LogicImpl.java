@@ -236,6 +236,7 @@ public class LogicImpl implements Logic{
 			}
 		}
 		Log.v("yzx12", "已经完成的关卡数量"+String.valueOf(num));
+	
 		return result;
 	}
 	
@@ -250,6 +251,7 @@ public class LogicImpl implements Logic{
 				}
 			}
 		}
+		Log.v("yzx12", "游戏结束");
 		return true;
 	}
 }
