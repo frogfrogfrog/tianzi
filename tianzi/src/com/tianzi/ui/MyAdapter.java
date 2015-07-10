@@ -91,7 +91,7 @@ public class MyAdapter extends BaseAdapter{
     {   
         this.context=context;  
         Logic go=new LogicImpl();
-        result=go.levelIsChieved();
+        result=go.levelIsChieved(this.context);
     }   
     //閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟� 
     public int getCount()   

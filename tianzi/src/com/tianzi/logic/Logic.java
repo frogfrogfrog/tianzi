@@ -37,5 +37,5 @@ public interface Logic {
 	 * 判断关卡是否已经通过
 	 * @return 
 	 */
-	public boolean[] levelIsChieved();
+	public boolean[] levelIsChieved(Context context);
 }

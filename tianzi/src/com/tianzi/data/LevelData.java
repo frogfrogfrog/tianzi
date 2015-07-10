@@ -14,6 +14,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.tianzi.logic.CellData;
@@ -204,6 +205,20 @@ public class LevelData {
 	}
 
 	public void saveGameRecord() {
+		if(this.getIsEnd()==1){
+			//实例化SharedPreferences对象（第一步） 
+			SharedPreferences sp= context.getSharedPreferences("achieve", 
+			context.MODE_PRIVATE); 
+			//实例化SharedPreferences.Editor对象（第二步） 
+			SharedPreferences.Editor editor = sp.edit(); 
+			//获取已经完成的关卡数目 
+			int num=sp.getInt("achieveNum", 0);
+			num++;
+			editor.putInt("achieveNum", num);
+			//提交当前数据 
+			editor.commit(); 
+		}
+		
 		String path = String.valueOf(level) + ".ans";
 
 		try {

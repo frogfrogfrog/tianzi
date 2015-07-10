@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.tianzi.data.LevelData;
@@ -219,10 +220,21 @@ public class LogicImpl implements Logic{
 		return false;
 	}
 	@Override
-	public boolean[] levelIsChieved() {
+	public boolean[] levelIsChieved(Context context) {
 		// TODO Auto-generated method stub
 		boolean[] result=new boolean[27];
+		//实例化SharedPreferences对象（第一步） 
+		SharedPreferences sp= context.getSharedPreferences("achieve", 
+		context.MODE_PRIVATE); 
+		
+		int num=sp.getInt("achieveNum", 0);
 		result[0]=true;
+		for(int i=0;i<num;i++){
+			if(num!=27){
+				result[i+1]=true;
+			}
+		}
+		Log.v("yzx12", "已经完成的关卡数量"+String.valueOf(num));
 		return result;
 	}
 	
