@@ -24,15 +24,15 @@ public class GameActivity extends Activity {
 	GridView gridView;
 	GridView gridView2;
 	TextView questionView;
-	String [] word = {
-		"Q","W","E","R","T","Y","O","P",
-		"A","S","D","F","G","H","J","K",
-		"L","Z","X","C","V","B","N","M"
+	char [] word = {
+		'Q','W','E','R','T','Y','O','P',
+		'A','S','D','F','G','H','J','K',
+		'L','Z','X','C','V','B','N','M'
 	};
 	Logic logic;
 	CellData[][] cellMap;
-	ArrayList<CellData> cellList;
-	
+	ArrayList<CellData> cellList = new ArrayList<CellData>();
+	ResultData resultData;
 	
 	
 	@Override
@@ -51,8 +51,8 @@ public class GameActivity extends Activity {
 		questionView = (TextView) findViewById(R.id.game_textview_question);
 		gridView = (GridView) findViewById(R.id.game_gridview);
 		gridView2 =(GridView) findViewById(R.id.game_gridview2);
-		adapter = new Game_gridview_adapter(GameActivity.this,cellList);
 		
+		adapter = new Game_gridview_adapter(GameActivity.this,cellList);
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(new OnItemClickListener(){
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -70,8 +70,19 @@ public class GameActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if(currentPosition>=0){
-//					data[currentPosition] = word[position];
-				    adapter.notifyDataSetChanged();
+					CellData temp = cellList.get(currentPosition);
+					if(temp.getState()==2&&temp.getState()==1){
+						resultData = logic.enterWord(currentPosition/10, currentPosition%10, word[position]);
+						cellList.get(currentPosition).setWord(word[position]);
+						if(resultData.getIsCorrect()){
+							ArrayList<CellData> ansList = resultData.getCellData();
+							for(CellData ans:ansList){
+								cellList.get(ans.getxAxis()*10+ans.getyAxis()).setWord(ans.getWord());
+								cellList.get(ans.getxAxis()*10+ans.getyAxis()).setState(ans.getState());
+							}
+						}
+					    adapter.notifyDataSetChanged();
+					}
 				}
 				
 			}
