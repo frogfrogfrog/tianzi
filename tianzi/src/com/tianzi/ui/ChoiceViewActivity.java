@@ -2,7 +2,7 @@ package com.tianzi.ui;
 
 
 import com.example.tianzi.R;
-import com.tianzi.ui.MyAdapter.MyOnItemClickListener;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -38,7 +38,7 @@ public class ChoiceViewActivity extends Activity {
         
    //     g.setOnItemClickListener(new MyOnItemClickListener());
         
-        Button button=(Button)findViewById(R.id.button);
+        Button button=(Button)findViewById(R.id.level_button);
     	button.setBackgroundResource(R.drawable.buttonseloctor);
     }
     

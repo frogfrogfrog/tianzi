@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class LevelData {
 
 	// 结束标志位
 	private int isEnd;
-	
+
 	private Context context;
 
 	public LevelData(int level) throws IOException {
@@ -96,9 +97,10 @@ public class LevelData {
 
 	private void initData() throws IOException {
 		InputStream fis = null;
-		try{
-			fis=context.getResources().getAssets().open(String.valueOf(level) + ".puz");
-		}catch(IOException e){
+		try {
+			fis = context.getResources().getAssets()
+					.open(String.valueOf(level) + ".puz");
+		} catch (IOException e) {
 			Log.v("yzx12", "fileNotFound");
 		}
 		InputStreamReader inputReader = new InputStreamReader(fis);
@@ -118,58 +120,52 @@ public class LevelData {
 			temp = br.readLine();
 		}
 
-		String ansPath =String.valueOf(level) + ".ans";
-		
-		try{
+		String ansPath = String.valueOf(level) + ".ans";
+
+		try {
 			// 如果level.ans已经创建，则说明用户已经玩过这个关卡，则导入用户数据
-			FileInputStream ansFs=context.openFileInput(ansPath);
-			
-			byte[] buff=new byte[1024];
-			int hasRead=0;
+			FileInputStream ansFs = context.openFileInput(ansPath);
+
+			byte[] buff = new byte[1024];
+			int hasRead = 0;
 			int count = 0;
 			StringBuilder sb;
-			while ((hasRead=fis.read(buff))>0) {
-				sb=new StringBuilder("");
-				sb.append(new String(buff,0,hasRead));
+			while ((hasRead = ansFs.read(buff)) > 0) {
+				sb = new StringBuilder("");
+				sb.append(new String(buff, 0, hasRead));
 				this.addAnswer(count, sb.toString());
 				count++;
 			}
-			
-		}catch(FileNotFoundException e){
-			File ansFile = new File(ansPath);
-			if (!ansFile.exists() || ansFile.isDirectory()) {
-				// 保存用户答题的文件还未创建
-				ansFile.createNewFile();
-				try {
-					// 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
-					FileWriter writer = new FileWriter(ansFile, true);
 
-					for (int i = 0; i < 10; i++) {
-						StringBuffer ansSb = new StringBuffer();
-						for (int j = 0; j < 10; j++) {
-							if (coordinate[i][j][0] >= 0) {
-								// 这个格子有题目
-								userAns[i][j].setState(1);
-							} else {
-								// 这个格子没有题目，不能在此处答题
-								userAns[i][j].setState(0);
-							}
-							userAns[i][j].setxAxis(i);
-							userAns[i][j].setyAxis(j);
-							ansSb.append(String.valueOf(userAns[i][j].getState()));
-							if (j != 9) {
-								ansSb.append(" ");
-							} else {
-								ansSb.append("\r\n");
-							}
+		} catch (FileNotFoundException e) {
+			try {
+				// 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
+				FileOutputStream fos=context.openFileOutput(ansPath, context.MODE_APPEND);
+
+				for (int i = 0; i < 10; i++) {
+					StringBuffer ansSb = new StringBuffer();
+					for (int j = 0; j < 10; j++) {
+						if (coordinate[i][j][0] >= 0) {
+							// 这个格子有题目
+							userAns[i][j].setState(1);
+						} else {
+							// 这个格子没有题目，不能在此处答题
+							userAns[i][j].setState(0);
 						}
-						writer.write(ansSb.toString());
+						userAns[i][j].setxAxis(i);
+						userAns[i][j].setyAxis(j);
+						ansSb.append(String.valueOf(userAns[i][j].getState()));
+						if (j != 9) {
+							ansSb.append(" ");
+						} else {
+							ansSb.append("\r\n");
+						}
 					}
-					writer.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
 				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
+
 		}
 	}
 
@@ -233,7 +229,7 @@ public class LevelData {
 							|| userAns[i][j].getState() == 3) {
 						ansSb.append(String.valueOf(userAns[i][j].getState())
 								+ String.valueOf(userAns[i][j].getWord()));
-					}else{
+					} else {
 						ansSb.append(String.valueOf(userAns[i][j].getState()));
 					}
 					if (j != 9) {

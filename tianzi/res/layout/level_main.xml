@@ -12,19 +12,17 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 		<Button 
-			android:id="@+id/button"
+			android:id="@+id/level_button"
 			style="@style/layout_horizontal"
             android:layout_weight="1"
 			android:background="@drawable/buttonseloctor"
-			android:text="返回"
 		/>
 
 		<Button
-		    android:id="@+id/title"
+		    android:id="@+id/level_title"
 			style="@style/layout_horizontal"
 			android:layout_weight="4"
-			android:text="关卡"
-			android:background="@android:color/transparent"
+			android:background="@drawable/level_title"
 		    />	
 		 <Button
 			style="@style/layout_horizontal"
