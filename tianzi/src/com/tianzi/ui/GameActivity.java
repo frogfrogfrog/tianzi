@@ -1,58 +1,101 @@
 package com.tianzi.ui;
 
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.example.tianzi.R;
+import com.tianzi.logic.*;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
+
 
 public class GameActivity extends Activity {
 
-	private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;  
-	private final int FP = ViewGroup.LayoutParams.FILL_PARENT;
-	
+	private int currentPosition=-1;
 	Game_gridview_adapter adapter;
+	Game_keyboard_adapter adapter2;
 	GridView gridView;
-	TableRow tableRow;
-	String [] word = {
-		"Q","W","E","R","T","Y","O","P",
-		"A","S","D","F","G","H","J","K",
-		"L","Z","X","C","V","B","N","M"
+	GridView gridView2;
+	TextView questionView;
+	char [] word = {
+		'Q','W','E','R','T','Y','O','P',
+		'A','S','D','F','G','H','J','K',
+		'L','Z','X','C','V','B','N','M'
 	};
-	String[] data = new String[100];
-	String input;
+	Logic logic;
+	CellData[][] cellMap;
+	ArrayList<CellData> cellList = new ArrayList<CellData>();
+	ResultData resultData;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
-		gridView = (GridView) findViewById(R.id.game_gridview);
-		
-		//
-		//测试用
-		//
-		for(int i=0;i<100;i++){
-			data[i] = String.valueOf(i);
+		logic = new LogicImpl();
+		cellMap = logic.startGame(1);
+		for(int i=0;i<10;i++){
+			for(int n=0;n<10;n++){			
+				cellList.add(cellMap[i][n]);
+			}
 		}
 		
-		adapter = new Game_gridview_adapter(GameActivity.this,data);
+		questionView = (TextView) findViewById(R.id.game_textview_question);
+		gridView = (GridView) findViewById(R.id.game_gridview);
+		gridView2 =(GridView) findViewById(R.id.game_gridview2);
+		
+		adapter = new Game_gridview_adapter(GameActivity.this,cellList);
 		gridView.setAdapter(adapter);
+		gridView.setOnItemClickListener(new OnItemClickListener(){
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				currentPosition = position;
+				Map<String,String> question = logic.getTitles(position/10, position%10);
+				questionView.setText("横向问题：" + question.get("xtitle") + "  纵向问题：" + question.get("ytitle"));
+			}
+			
+		});
+		
+		adapter2 = new Game_keyboard_adapter(GameActivity.this);
+		gridView2.setAdapter(adapter2);
+		gridView2.setOnItemClickListener(new OnItemClickListener(){
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(currentPosition>=0){
+					CellData temp = cellList.get(currentPosition);
+					if(temp.getState()==2&&temp.getState()==1){
+						resultData = logic.enterWord(currentPosition/10, currentPosition%10, word[position]);
+						cellList.get(currentPosition).setWord(word[position]);
+						if(resultData.getIsCorrect()){
+							ArrayList<CellData> ansList = resultData.getCellData();
+							for(CellData ans:ansList){
+								cellList.get(ans.getxAxis()*10+ans.getyAxis()).setWord(ans.getWord());
+								cellList.get(ans.getxAxis()*10+ans.getyAxis()).setState(ans.getState());
+							}
+						}
+					    adapter.notifyDataSetChanged();
+					}
+				}
+				
+			}
+			
+		});
 		
 		
 		
-		TableLayout tableLayout = (TableLayout)findViewById(R.id.game_tablelayout);   
+		
+		
+		
+		
+/*	TableLayout tableLayout = (TableLayout)findViewById(R.id.game_tablelayout);   
         for(int row=0;row<3;row++)  
         {  
             TableRow tableRow=new TableRow(this);  
@@ -67,7 +110,7 @@ public class GameActivity extends Activity {
 
 					@Override
 					public void onClick(View v) {
-//						data[0] = ;
+						data[0] = (String) v.getContext();
 						adapter.notifyDataSetChanged();
 					}
                 	
@@ -75,7 +118,8 @@ public class GameActivity extends Activity {
                 tableRow.addView(tv);  
             }  
             tableLayout.addView(tableRow);  
-        }  
+        } 
+*/ 
 		
 	}
 

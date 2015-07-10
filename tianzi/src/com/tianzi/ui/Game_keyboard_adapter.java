@@ -5,9 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.example.tianzi.R;
-
-
 
 
 public class Game_keyboard_adapter extends BaseAdapter{
@@ -18,6 +17,10 @@ public class Game_keyboard_adapter extends BaseAdapter{
 		};
 	private Context context;
 	private LayoutInflater inflater = null;
+	
+	Game_keyboard_adapter(Context context){
+		this.context = context;
+	}
 	
 	@Override
 	public int getCount() {
@@ -53,7 +56,20 @@ public class Game_keyboard_adapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		return null;
+		Holder holder;
+		inflater = LayoutInflater.from(context);
+		if(convertView == null){
+			convertView = inflater.inflate(R.layout.game_gridview_item, null);
+			holder = new Holder();
+			holder.tv = (TextView) convertView.findViewById(R.id.game_gridview_item_textview);
+			convertView.setTag(holder);	
+		}else{
+			holder = (Holder) convertView.getTag();
+		}
+		holder.tv.setText(word[position]);
+		holder.tv.setBackgroundResource(R.drawable.game_button3);
+		
+		return convertView;
 	}
 
 }
