@@ -21,7 +21,7 @@ public class TestActivity extends Activity {
 		setContentView(R.layout.activity_test);
 		
 		logic = new LogicImpl();
-		cellMap = logic.startGame(1);
+		cellMap = logic.startGame(1,this);
 		for(int i=0;i<10;i++){
 			for(int n=0;n<10;n++){			
 				test+=cellMap[i][n];

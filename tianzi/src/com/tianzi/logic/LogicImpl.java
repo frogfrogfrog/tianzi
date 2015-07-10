@@ -6,6 +6,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.tianzi.data.LevelData;
 
 public class LogicImpl implements Logic{
@@ -26,10 +29,11 @@ public class LogicImpl implements Logic{
 		return result;
 	}
 	@Override
-	public CellData[][] startGame(int level) {
+	public CellData[][] startGame(int level,Context context) {
 		// TODO Auto-generated method stub
+		Log.v("yzx12", "进入到startGame方法");
 		try {
-			ld=new LevelData(level);
+			ld=new LevelData(level,context);
 			CellData[][] result=ld.getUserAns();
 			return result;
 		} catch (IOException e) {

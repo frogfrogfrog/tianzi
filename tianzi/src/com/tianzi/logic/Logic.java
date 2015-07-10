@@ -2,6 +2,8 @@ package com.tianzi.logic;
 
 import java.util.Map;
 
+import android.content.Context;
+
 public interface Logic {
 	/**
 	 * 点击一个格子后，返回这个格子的横纵问题
@@ -14,7 +16,7 @@ public interface Logic {
 	 * @param level 用户选择的关卡
 	 * @return CellData[][] 10*10的格子信息
 	 */
-	public CellData[][] startGame(int level);
+	public CellData[][] startGame(int level,Context contex);
 	
 	/**
 	 * 

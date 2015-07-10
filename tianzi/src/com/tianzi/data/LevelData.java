@@ -10,15 +10,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.tianzi.logic.CellData;
 
-//
 public class LevelData {
 	private int level;
 	// 横题目和纵题目
@@ -37,7 +36,8 @@ public class LevelData {
 
 	private Context context;
 
-	public LevelData(int level) throws IOException {
+	public LevelData(int level, Context context) throws IOException {
+		this.context = context;
 		this.level = level;
 		// 横问题
 		xtitle = new ArrayList<String>();
@@ -96,22 +96,17 @@ public class LevelData {
 	}
 
 	private void initData() throws IOException {
-		InputStream fis = null;
-		try {
-			fis = context.getResources().getAssets()
-					.open(String.valueOf(level) + ".puz");
-		} catch (IOException e) {
-			Log.v("yzx12", "fileNotFound");
-		}
-		InputStreamReader inputReader = new InputStreamReader(fis);
-
-		BufferedReader br = new BufferedReader(inputReader);
+		Log.v("yzx12", "进入initData");
+		String path = String.valueOf(level) + ".puz";
+		InputStream is = context.getResources().getAssets().open(path);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String temp = null;
 		temp = br.readLine();
 		while (temp != null) {
 			// System.out.println(temp);
 			String[] splitTemp = temp.split(" ");
 			if (splitTemp.length >= 6) {
+				Log.v("yzx12", temp);
 				this.addQuestion(Integer.parseInt(splitTemp[0]), splitTemp[1],
 						splitTemp[2], splitTemp[3],
 						Integer.parseInt(splitTemp[4]) - 1,
@@ -122,51 +117,50 @@ public class LevelData {
 
 		String ansPath = String.valueOf(level) + ".ans";
 
+		Log.v("yzx12", "xxx");
 		try {
-			// 如果level.ans已经创建，则说明用户已经玩过这个关卡，则导入用户数据
-			FileInputStream ansFs = context.openFileInput(ansPath);
+			FileInputStream fis = context.openFileInput(ansPath);
 
-			byte[] buff = new byte[1024];
-			int hasRead = 0;
+			// 如果level.ans已经创建，则说明用户已经玩过这个关卡，则导入用户数据
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader ansbr = new BufferedReader(isr);
+			temp = ansbr.readLine();
 			int count = 0;
-			StringBuilder sb;
-			while ((hasRead = ansFs.read(buff)) > 0) {
-				sb = new StringBuilder("");
-				sb.append(new String(buff, 0, hasRead));
-				this.addAnswer(count, sb.toString());
+			while (temp != null) {
+				this.addAnswer(count, temp);
+				temp = ansbr.readLine();
 				count++;
 			}
-
 		} catch (FileNotFoundException e) {
-			try {
-				// 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
-				FileOutputStream fos=context.openFileOutput(ansPath, context.MODE_APPEND);
+			FileOutputStream fos = context.openFileOutput(ansPath,
+					context.MODE_APPEND);
 
-				for (int i = 0; i < 10; i++) {
-					StringBuffer ansSb = new StringBuffer();
-					for (int j = 0; j < 10; j++) {
-						if (coordinate[i][j][0] >= 0) {
-							// 这个格子有题目
-							userAns[i][j].setState(1);
-						} else {
-							// 这个格子没有题目，不能在此处答题
-							userAns[i][j].setState(0);
-						}
-						userAns[i][j].setxAxis(i);
-						userAns[i][j].setyAxis(j);
-						ansSb.append(String.valueOf(userAns[i][j].getState()));
-						if (j != 9) {
-							ansSb.append(" ");
-						} else {
-							ansSb.append("\r\n");
-						}
+			PrintStream ps = new PrintStream(fos);
+
+			for (int i = 0; i < 10; i++) {
+				StringBuffer ansSb = new StringBuffer();
+				for (int j = 0; j < 10; j++) {
+					if (coordinate[i][j][0] >= 0) {
+						// 这个格子有题目
+						userAns[i][j].setState(1);
+					} else {
+						// 这个格子没有题目，不能在此处答题
+						userAns[i][j].setState(0);
+					}
+					userAns[i][j].setxAxis(i);
+					userAns[i][j].setyAxis(j);
+					ansSb.append(String.valueOf(userAns[i][j].getState()));
+					if (j != 9) {
+						ansSb.append(" ");
+					} else {
+						ansSb.append("\r\n");
 					}
 				}
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				ps.print(ansSb.toString());
 			}
-
+			ps.close();
 		}
+
 	}
 
 	private void addAnswer(int row, String rowStr) {
@@ -212,16 +206,19 @@ public class LevelData {
 	}
 
 	public void saveGameRecord() {
-		String path = "data/" + String.valueOf(level) + ".ans";
-		File file = new File(path);
+		String path = String.valueOf(level) + ".ans";
+
 		try {
-			// 先清空游戏记录
-			FileWriter fileWriter = new FileWriter(file);
-			fileWriter.write("");
-			fileWriter.flush();
-			fileWriter.close();
-			// 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
-			FileWriter writer = new FileWriter(file, true);
+			FileOutputStream fos = context.openFileOutput(path,
+					context.MODE_PRIVATE);
+			PrintStream ps = new PrintStream(fos);
+			ps.print("");
+			ps.flush();
+			ps.close();
+
+			FileOutputStream fos1 = context.openFileOutput(path,
+					context.MODE_APPEND);
+			ps = new PrintStream(fos1);
 			for (int i = 0; i < 10; i++) {
 				StringBuffer ansSb = new StringBuffer();
 				for (int j = 0; j < 10; j++) {
@@ -238,13 +235,13 @@ public class LevelData {
 						ansSb.append("\r\n");
 					}
 				}
-				writer.write(ansSb.toString());
+				ps.print(ansSb.toString());
 			}
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+			ps.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-
 	}
 
 	public int getLevel() {
