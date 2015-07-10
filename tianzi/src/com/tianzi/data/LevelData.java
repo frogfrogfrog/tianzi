@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.tianzi.logic.CellData;
 
+//
 public class LevelData {
 	private int level;
 	// 横题目和纵题目
@@ -135,44 +136,41 @@ public class LevelData {
 			}
 			
 		}catch(FileNotFoundException e){
-			
-		}
-		File ansFile = new File(ansPath);
-		if (!ansFile.exists() || ansFile.isDirectory()) {
-			// 保存用户答题的文件还未创建
-			ansFile.createNewFile();
-			try {
-				// 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
-				FileWriter writer = new FileWriter(ansFile, true);
+			File ansFile = new File(ansPath);
+			if (!ansFile.exists() || ansFile.isDirectory()) {
+				// 保存用户答题的文件还未创建
+				ansFile.createNewFile();
+				try {
+					// 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
+					FileWriter writer = new FileWriter(ansFile, true);
 
-				for (int i = 0; i < 10; i++) {
-					StringBuffer ansSb = new StringBuffer();
-					for (int j = 0; j < 10; j++) {
-						if (coordinate[i][j][0] >= 0) {
-							// 这个格子有题目
-							userAns[i][j].setState(1);
-						} else {
-							// 这个格子没有题目，不能在此处答题
-							userAns[i][j].setState(0);
+					for (int i = 0; i < 10; i++) {
+						StringBuffer ansSb = new StringBuffer();
+						for (int j = 0; j < 10; j++) {
+							if (coordinate[i][j][0] >= 0) {
+								// 这个格子有题目
+								userAns[i][j].setState(1);
+							} else {
+								// 这个格子没有题目，不能在此处答题
+								userAns[i][j].setState(0);
+							}
+							userAns[i][j].setxAxis(i);
+							userAns[i][j].setyAxis(j);
+							ansSb.append(String.valueOf(userAns[i][j].getState()));
+							if (j != 9) {
+								ansSb.append(" ");
+							} else {
+								ansSb.append("\r\n");
+							}
 						}
-						userAns[i][j].setxAxis(i);
-						userAns[i][j].setyAxis(j);
-						ansSb.append(String.valueOf(userAns[i][j].getState()));
-						if (j != 9) {
-							ansSb.append(" ");
-						} else {
-							ansSb.append("\r\n");
-						}
+						writer.write(ansSb.toString());
 					}
-					writer.write(ansSb.toString());
+					writer.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
-		
-
 	}
 
 	private void addAnswer(int row, String rowStr) {
