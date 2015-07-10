@@ -32,7 +32,7 @@ public class Begin extends Activity {
         logo=(Button)findViewById(R.id.begin_logo);
         start=(Button)findViewById(R.id.begin_start);
         help=(Button)findViewById(R.id.begin_help);
-        about=(Button)findViewById(R.id.begin_about);
+//        about=(Button)findViewById(R.id.begin_about);
     }
     
 }
