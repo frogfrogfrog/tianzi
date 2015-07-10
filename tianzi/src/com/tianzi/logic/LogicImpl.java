@@ -180,7 +180,8 @@ public class LogicImpl implements Logic{
 	@Override
 	public boolean[] levelIsChieved() {
 		// TODO Auto-generated method stub
-		return null;
+		boolean[] result=new boolean[27];
+		result[0]=true;
+		return result;
 	}
-	
 }
