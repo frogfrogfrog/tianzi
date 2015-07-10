@@ -34,6 +34,10 @@
             android:name="com.tianzi.ui.GameActivity"
             android:label="@string/title_activity_game" >
         </activity>
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test" >
+        </activity>
     </application>
 
 </manifest>
