@@ -27,14 +27,14 @@
         android:layout_alignParentRight="true"
         android:text="暂停"/>
     
-    <TextView
+<!--     <TextView
         android:id="@+id/coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/game_pause_button"
         android:layout_marginTop="12sp"
         android:text="金币：200" 
-        android:background="@drawable/game_bg_border"/>
+        android:background="@drawable/game_bg_border"/> -->
     
     <TextView 
         android:id="@+id/game_textview_question"
