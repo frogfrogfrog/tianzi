@@ -7,7 +7,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
 
 import com.tianzi.logic.CellData;
 
@@ -26,6 +32,8 @@ public class LevelData {
 
 	// 结束标志位
 	private int isEnd;
+	
+	private Context context;
 
 	public LevelData(int level) throws IOException {
 		this.level = level;
@@ -86,12 +94,15 @@ public class LevelData {
 	}
 
 	private void initData() throws IOException {
-		String path = "data/" + String.valueOf(level) + ".puz";
-		File file = new File(path);
-		if (!file.exists() || file.isDirectory()) {
-			throw new FileNotFoundException();
+		InputStream fis = null;
+		try{
+			fis=context.getResources().getAssets().open(String.valueOf(level) + ".puz");
+		}catch(IOException e){
+			Log.v("yzx12", "fileNotFound");
 		}
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		InputStreamReader inputReader = new InputStreamReader(fis);
+
+		BufferedReader br = new BufferedReader(inputReader);
 		String temp = null;
 		temp = br.readLine();
 		while (temp != null) {
@@ -106,7 +117,26 @@ public class LevelData {
 			temp = br.readLine();
 		}
 
-		String ansPath = "data/" + String.valueOf(level) + ".ans";
+		String ansPath =String.valueOf(level) + ".ans";
+		
+		try{
+			// 如果level.ans已经创建，则说明用户已经玩过这个关卡，则导入用户数据
+			FileInputStream ansFs=context.openFileInput(ansPath);
+			
+			byte[] buff=new byte[1024];
+			int hasRead=0;
+			int count = 0;
+			StringBuilder sb;
+			while ((hasRead=fis.read(buff))>0) {
+				sb=new StringBuilder("");
+				sb.append(new String(buff,0,hasRead));
+				this.addAnswer(count, sb.toString());
+				count++;
+			}
+			
+		}catch(FileNotFoundException e){
+			
+		}
 		File ansFile = new File(ansPath);
 		if (!ansFile.exists() || ansFile.isDirectory()) {
 			// 保存用户答题的文件还未创建
@@ -141,15 +171,7 @@ public class LevelData {
 				e.printStackTrace();
 			}
 		}
-		// 如果level.ans已经创建，则说明用户已经玩过这个关卡，则导入用户数据
-		BufferedReader ansbr = new BufferedReader(new FileReader(ansFile));
-		temp = ansbr.readLine();
-		int count = 0;
-		while (temp != null) {
-			this.addAnswer(count, temp);
-			temp = ansbr.readLine();
-			count++;
-		}
+		
 
 	}
 

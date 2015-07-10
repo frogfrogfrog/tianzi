@@ -9,7 +9,7 @@ import java.util.Map;
 import com.tianzi.data.LevelData;
 
 public class LogicImpl implements Logic{
-	private LevelData ld;
+	private static LevelData ld;
 	@Override
 	public Map<String, String> getTitles(int x,int y) {
 		// TODO Auto-generated method stub
