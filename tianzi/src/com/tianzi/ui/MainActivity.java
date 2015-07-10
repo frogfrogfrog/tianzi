@@ -3,6 +3,7 @@ package com.tianzi.ui;
 
 
 import com.example.tianzi.R;
+import com.example.tianzi.TestActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,6 +26,7 @@ public class MainActivity extends Activity {
 ////    	startActivity(intent);
 //		Intent intent=new Intent(MainActivity.this,GameActivity.class);
 //    	startActivity(intent);
+
 //	}
 	Button logo;
 	Button start;
@@ -45,5 +47,9 @@ public class MainActivity extends Activity {
         logo=(Button)findViewById(R.id.begin_logo);
         start=(Button)findViewById(R.id.begin_start);
         help=(Button)findViewById(R.id.begin_help);
-    }
+
+//		Intent intent=new Intent(MainActivity.this,GameActivity.class);
+		Intent intent=new Intent(MainActivity.this,TestActivity.class);
+    	startActivity(intent);
+	}
 }
