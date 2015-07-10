@@ -1,6 +1,9 @@
 package com.tianzi.ui;
 
+import java.util.ArrayList;
+
 import com.example.tianzi.R;
+import com.tianzi.logic.CellData;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,22 +15,17 @@ import android.widget.TextView;
 public class Game_gridview_adapter extends BaseAdapter{
 	private Context context;
 	private LayoutInflater inflater = null;
-	private Integer[] image = {
-			R.drawable.game_button1,
-			R.drawable.game_button2,
-			R.drawable.game_button3,
-	};
-	private String[] data;
+	private ArrayList<CellData> cellList;
 	
 	
-	Game_gridview_adapter(Context context,String[] data){
+	Game_gridview_adapter(Context context,ArrayList<CellData> cellList){
 		this.context=context;
-		this.data = data;
+		this.cellList = cellList;
 	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return data.length;
+		return cellList.size();
 	}
 
 	@Override
@@ -68,8 +66,13 @@ public class Game_gridview_adapter extends BaseAdapter{
 		}else{
 			holder = (Holder) convertView.getTag();
 		}
-		holder.tv.setText(data[position]);
-		holder.tv.setBackgroundResource(R.drawable.game_button3);
+		if(cellList.get(position).getState()==0){
+			holder.tv.setText("null");
+			
+		}else{
+			holder.tv.setText(cellList.get(position).getWord());
+			holder.tv.setBackgroundResource(R.drawable.game_button3);
+		}
 		
 		return convertView;
 	}

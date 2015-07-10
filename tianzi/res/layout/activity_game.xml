@@ -61,8 +61,22 @@
         android:verticalSpacing="5px"
         android:gravity="center"
         android:numColumns="10"/>
+    
+     <GridView
+        android:id="@+id/game_gridview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_gridview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="45sp"
+        android:layout_marginRight="45sp"
+        android:layout_marginTop="12sp"
+        android:horizontalSpacing="5px"
+        android:verticalSpacing="5px"
+        android:gravity="center"
+        android:numColumns="8"/>
 
-    <TableLayout 
+<!--     <TableLayout 
         android:id="@+id/game_tablelayout"
         android:layout_below="@id/game_gridview"
         android:layout_centerHorizontal="true"
@@ -71,7 +85,7 @@
         android:layout_marginTop="12sp"
         android:layout_marginLeft="8sp"
         android:layout_marginRight="8sp">
-    </TableLayout>       
+    </TableLayout>  -->      
   
 
 
