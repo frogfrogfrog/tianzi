@@ -224,6 +224,7 @@ public class LogicImpl implements Logic{
 		// TODO Auto-generated method stub
 		boolean[] result=new boolean[27];
 		//实例化SharedPreferences对象（第一步） 
+		Log.v("yzx12", "levelIsChieved");
 		SharedPreferences sp= context.getSharedPreferences("achieve", 
 		context.MODE_PRIVATE); 
 		
