@@ -54,10 +54,12 @@ public class LogicImpl implements Logic{
 			return null;
 		}	
 		ResultData result=new ResultData();
+		ArrayList<CellData> temp=new ArrayList<CellData>();
+		temp.add(cdList[x][y]);
+		
 		ArrayList<CellData> resultCD=new ArrayList<CellData>();
 		if(coordinate[x][y][1]>=0){
 			//填的这个字处于一个横问题中
-			ArrayList<CellData> temp=new ArrayList<CellData>();
 			int flag=1;
 			for(int i=0;i<10-y;i++){
 				if(cdList[x][y+i].getState()==2){
@@ -101,7 +103,6 @@ public class LogicImpl implements Logic{
 		}
 		if(coordinate[x][y][2]>=0){
 			//填的这个字处于一个纵问题中
-			ArrayList<CellData> temp=new ArrayList<CellData>();
 			int flag=1;
 			for(int i=0;i<10-y;i++){
 				if(cdList[x+i][y].getState()==2){
@@ -163,6 +164,9 @@ public class LogicImpl implements Logic{
 		}
 		
 		
+		for(CellData cd:resultCD){
+			Log.v("yzx12", String.valueOf(cd.getWord()));
+		}
 		result.setCellData(resultCD);
 		
 		//最后不管有没有答题正确都要保存一下游戏

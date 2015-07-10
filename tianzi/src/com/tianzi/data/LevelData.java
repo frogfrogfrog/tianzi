@@ -106,7 +106,6 @@ public class LevelData {
 			// System.out.println(temp);
 			String[] splitTemp = temp.split(" ");
 			if (splitTemp.length >= 6) {
-				Log.v("yzx12", temp);
 				this.addQuestion(Integer.parseInt(splitTemp[0]), splitTemp[1],
 						splitTemp[2], splitTemp[3],
 						Integer.parseInt(splitTemp[4]) - 1,
@@ -117,7 +116,6 @@ public class LevelData {
 
 		String ansPath = String.valueOf(level) + ".ans";
 
-		Log.v("yzx12", "xxx");
 		try {
 			FileInputStream fis = context.openFileInput(ansPath);
 

@@ -59,7 +59,14 @@ public class GameActivity extends Activity {
 					int position, long id) {
 				currentPosition = position;
 				Map<String,String> question = logic.getTitles(position/10, position%10);
-				questionView.setText("横向问题：" + question.get("xtitle") + "  纵向问题：" + question.get("ytitle"));
+				String temp="";
+				if(question.get("xtitle")!=null){
+					temp="横问题："+question.get("xtitle")+"  ";
+				}
+				if(question.get("ytitle")!=null){
+					temp=temp+"纵问题："+question.get("ytitle");
+				}
+				questionView.setText(temp);
 			}
 			
 		});
@@ -71,7 +78,7 @@ public class GameActivity extends Activity {
 					int position, long id) {
 				if(currentPosition>=0){
 					CellData temp = cellList.get(currentPosition);
-					if(temp.getState()==2&&temp.getState()==1){
+					if(temp.getState()==2||temp.getState()==1){
 						resultData = logic.enterWord(currentPosition/10, currentPosition%10, word[position]);
 						cellList.get(currentPosition).setWord(word[position]);
 						if(resultData.getIsCorrect()){

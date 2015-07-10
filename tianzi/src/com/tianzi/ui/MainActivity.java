@@ -45,5 +45,7 @@ public class MainActivity extends Activity {
         logo=(Button)findViewById(R.id.begin_logo);
         start=(Button)findViewById(R.id.begin_start);
         help=(Button)findViewById(R.id.begin_help);
+        Intent intent=new Intent(MainActivity.this,GameActivity.class);
+    	startActivity(intent);
     }
 }

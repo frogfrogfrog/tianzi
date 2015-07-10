@@ -66,12 +66,19 @@ public class Game_gridview_adapter extends BaseAdapter{
 		}else{
 			holder = (Holder) convertView.getTag();
 		}
-		if(cellList.get(position).getState()==0){
-			holder.tv.setText("null");
+		if(cellList.get(position).getState()==0){//不能输入的格子
 			
-		}else{
-			holder.tv.setText(cellList.get(position).getWord());
+			holder.tv.setBackgroundResource(R.drawable.game_button1);
+		}else if(cellList.get(position).getState()==1){//未填写的格子
+			
 			holder.tv.setBackgroundResource(R.drawable.game_button3);
+			
+		}else if(cellList.get(position).getState()==2){//填写英文的格子
+			holder.tv.setText(cellList.get(position).getWord()+"");
+			holder.tv.setBackgroundResource(R.drawable.game_button3);
+		}else if(cellList.get(position).getState()==3){//填写中文的格子
+			holder.tv.setText(cellList.get(position).getWord()+"");
+			holder.tv.setBackgroundResource(R.drawable.game_button2);
 		}
 		
 		return convertView;
