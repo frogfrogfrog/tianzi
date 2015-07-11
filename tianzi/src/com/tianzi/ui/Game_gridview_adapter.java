@@ -16,7 +16,15 @@ public class Game_gridview_adapter extends BaseAdapter{
 	private LayoutInflater inflater = null;
 	private ArrayList<CellData> cellList;
 	
+	private int selectedItem=-1;
 	
+	
+	public int getSelectedItem() {
+		return selectedItem;
+	}
+	public void setSelectedItem(int selectedItem) {
+		this.selectedItem = selectedItem;
+	}
 	Game_gridview_adapter(Context context,ArrayList<CellData> cellList){
 		this.context=context;
 		this.cellList = cellList;
@@ -69,15 +77,25 @@ public class Game_gridview_adapter extends BaseAdapter{
 			
 			holder.tv.setBackgroundResource(R.drawable.game_button1);
 		}else if(cellList.get(position).getState()==1){//未填写的格子
-			
-			holder.tv.setBackgroundResource(R.drawable.game_button3);
-			
+			if(position==selectedItem){
+				holder.tv.setBackgroundResource(R.drawable.game_button4);
+			}else{
+				holder.tv.setBackgroundResource(R.drawable.game_button3);
+			}
 		}else if(cellList.get(position).getState()==2){//填写英文的格子
 			holder.tv.setText(cellList.get(position).getWord()+"");
-			holder.tv.setBackgroundResource(R.drawable.game_button3);
+			if(position==selectedItem){
+				holder.tv.setBackgroundResource(R.drawable.game_button4);
+			}else{
+				holder.tv.setBackgroundResource(R.drawable.game_button3);
+			}
 		}else if(cellList.get(position).getState()==3){//填写中文的格子
 			holder.tv.setText(cellList.get(position).getWord()+"");
-			holder.tv.setBackgroundResource(R.drawable.game_button2);
+			if(position==selectedItem){
+				holder.tv.setBackgroundResource(R.drawable.game_button4);
+			}else{
+				holder.tv.setBackgroundResource(R.drawable.game_button2);
+			}
 		}
 		
 		return convertView;

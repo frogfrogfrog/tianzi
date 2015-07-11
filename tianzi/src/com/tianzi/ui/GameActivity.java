@@ -91,6 +91,8 @@ public class GameActivity extends Activity {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				adapter.setSelectedItem(position);
+				adapter.notifyDataSetChanged();
 				currentPosition = position;
 				Map<String, String> question = logic.getTitles(position / 10,
 						position % 10);
@@ -118,7 +120,6 @@ public class GameActivity extends Activity {
 					if (temp.getState() == 2 || temp.getState() == 1) {
 
 						cellList.get(currentPosition).setWord(word[position]);
-						Log.v("xmr12", "从键盘输入了" + word[position]);
 						cellList.get(currentPosition).setState(2);
 						resultData = logic.enterWord(currentPosition / 10,
 								currentPosition % 10, word[position]);
@@ -134,7 +135,23 @@ public class GameActivity extends Activity {
 										.setState(ans.getState());
 							}
 						}
+						
+						int next=resultData.getNextX()*10+resultData.getNextY();
+						adapter.setSelectedItem(next);
 						adapter.notifyDataSetChanged();
+						currentPosition = next;
+						Map<String, String> question = logic.getTitles(next / 10,
+								next % 10);
+						String temp1 = "";
+						if (question.get("xtitle") != null) {
+							temp1 = "横问题：" + question.get("xtitle") + "  ";
+						}
+						if (question.get("ytitle") != null) {
+							temp1 = temp1 + "纵问题：" + question.get("ytitle");
+						}
+						questionView.setText(temp1);
+						
+						
 						if (resultData.getIsEnd()) {
 							Dialog alertDialog = new AlertDialog.Builder(view
 									.getContext())
@@ -203,6 +220,10 @@ public class GameActivity extends Activity {
 		 * }); tableRow.addView(tv); } tableLayout.addView(tableRow); }
 		 */
 
+	}
+	
+	private void setTitleOfCell(int position){
+		
 	}
 
 	@Override

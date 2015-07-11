@@ -6,6 +6,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -26,5 +27,19 @@ public class Help extends Activity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.help);
+	}
+	
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+			Intent intent = new Intent(
+					Help.this,
+					MainActivity.class);
+			startActivity(intent);
+			return false;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
 	}
 }

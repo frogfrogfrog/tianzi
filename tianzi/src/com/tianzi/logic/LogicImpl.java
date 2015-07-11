@@ -14,6 +14,20 @@ import com.tianzi.data.LevelData;
 
 public class LogicImpl implements Logic{
 	private static LevelData ld;
+	private int preX;
+	private int preY;
+	public int getPreX() {
+		return preX;
+	}
+	public void setPreX(int preX) {
+		this.preX = preX;
+	}
+	public int getPreY() {
+		return preY;
+	}
+	public void setPreY(int preY) {
+		this.preY = preY;
+	}
 	@Override
 	public Map<String, String> getTitles(int x,int y) {
 		// TODO Auto-generated method stub
@@ -153,23 +167,10 @@ public class LogicImpl implements Logic{
 			}
 		}
 		
-		if(resultCD.size()==0){
-			//说明要么答案没填完，要么不对
-			int nextX = x;
-			int nextY = y;
-			if(coordinate[x][y][1]>=0){
-				if(y!=9 && cdList[x][y+1].getState()==1){
-					nextY=y+1;
-				}
-			}
-			if(coordinate[x][y][2]>=0 ){
-				if(x!=9 && cdList[x+1][y].getState()==1){
-					nextX=x+1;
-				}
-			}
-			result.setNextX(nextX);
-			result.setNextY(nextY);
-		}
+		
+		this.setNextPosition(result,resultCD.size(), x, y);
+		this.setPreX(x);
+		this.setPreY(y);
 		
 		for(CellData cd:resultCD){
 			Log.v("yzx12", String.valueOf(cd.getWord()));
@@ -184,6 +185,92 @@ public class LogicImpl implements Logic{
 	public void saveGameRecord() {
 		// TODO Auto-generated method stub
 		ld.saveGameRecord();
+	}
+	
+	private void setNextPosition(ResultData rd,int flag,int x,int y){
+		CellData[][] cdList=ld.getUserAns();
+	
+			//说明要么答案没填完，要么不对
+			int nextX = x;
+			int nextY = y;
+			
+			//上一个位置和当前属于同一列，优先查找同列
+			if(this.getPreY()==y){
+				//属于同一列，那么查找这列有没有剩下的未填的
+				boolean flagY=true;  //flagY代表在同列未找到
+				for(int i=x+1;i<10;i++){
+					if(cdList[i][y].getState()==0){
+						break;
+					}
+					
+					if(cdList[i][y].getState()==1 || cdList[i][y].getState()==2){
+						nextY=y;
+						nextX=i;
+						//在同列找到了下一个未填的
+						flagY=false;
+						break;
+					}
+				}
+				if(flagY){
+					//未在同列找到，找同行的看看
+					for(int i=y+1;i<10;i++){
+						if(cdList[x][i].getState()==0){
+							break;
+						}
+						if(cdList[x][i].getState()==1 || cdList[x][i].getState()==2){
+							nextY=i;
+							nextX=x;
+							//在同行找到了下一个未填的且是同一个题目
+							break;
+						}
+					}
+				}
+			}else{
+				//上一个位置与当前不属于同列，就优先查找同行
+				//属于同一行，那么查找这行有没有剩下的未填的
+				boolean flagX=true;  //flagX代表在同行未找到
+				for(int i=y+1;i<10;i++){
+					if(cdList[x][i].getState()==0){
+						break;
+					}
+					
+					if(cdList[x][i].getState()==1 || cdList[x][i].getState()==2){
+						nextY=i;
+						nextX=x;
+						//在同行找到了下一个未填的且是同一个题目
+						flagX=false;
+						break;
+					}
+				}
+				if(flagX){
+					//未在同行找到，找同列的看看
+					for(int i=x+1;i<10;i++){
+						if(cdList[i][y].getState()==0){
+							break;
+						}
+						if(cdList[i][y].getState()==1 || cdList[i][y].getState()==2){
+							nextY=y;
+							nextX=i;
+							//在同行找到了下一个未填的
+							break;
+						}
+					}
+				}
+			}
+			
+//			if(coordinate[x][y][1]>=0){
+//				if(y!=9 && cdList[x][y+1].getState()==1){
+//					nextY=y+1;
+//				}
+//			}
+//			if(coordinate[x][y][2]>=0 ){
+//				if(x!=9 && cdList[x+1][y].getState()==1){
+//					nextX=x+1;
+//				}
+//			}
+			rd.setNextX(nextX);
+			rd.setNextY(nextY);
+		
 	}
 	
 	private boolean judgeAnsIsCorrect(ArrayList<CellData> resultCD,ArrayList<CellData> temp){
