@@ -8,6 +8,7 @@ import com.example.tianzi.R;
 import com.tianzi.logic.*;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,15 +35,19 @@ public class GameActivity extends Activity {
 	CellData[][] cellMap;
 	ArrayList<CellData> cellList = new ArrayList<CellData>();
 	ResultData resultData;
+	int level=1;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		
+		Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String levelStr= bundle.getString("level");
+        level=Integer.parseInt(levelStr);
 		logic = new LogicImpl();
-		cellMap = logic.startGame(1,this);
+		cellMap = logic.startGame(level,this);
 		for(int i=0;i<10;i++){
 			for(int n=0;n<10;n++){			
 				cellList.add(cellMap[i][n]);

@@ -155,7 +155,7 @@ public class MyAdapter extends BaseAdapter{
 		if(result[arg2]){
 			Bundle data=new Bundle();
 			//data.putInt("level", arg2+1);
-			data.putString("city", String.valueOf(arg2+1));
+			data.putString("level", String.valueOf(arg2+1));
         	Intent intent=new Intent(context,GameActivity.class);
         	intent.putExtras(data);
         	context.startActivity(intent);
@@ -168,7 +168,7 @@ public class MyAdapter extends BaseAdapter{
  			if(result[arg2+9]){
  			Bundle data=new Bundle();
 //         	data.putInt("level", arg2+10);
- 			data.putString("city", String.valueOf(arg2+10));
+ 			data.putString("level", String.valueOf(arg2+10));
          	Intent intent=new Intent(context,GameActivity.class);
          	intent.putExtras(data);
          	context.startActivity(intent);
@@ -180,7 +180,7 @@ public class MyAdapter extends BaseAdapter{
  			if(result[arg2+18]){
  			Bundle data=new Bundle();
  			//data.putInt("level", arg2+19);
- 			data.putString("city", String.valueOf(arg2+19));
+ 			data.putString("level", String.valueOf(arg2+19));
          	Intent intent=new Intent(context,GameActivity.class);
          	intent.putExtras(data);
          	context.startActivity(intent);

@@ -252,6 +252,7 @@ public class LogicImpl implements Logic{
 			}
 		}
 		Log.v("yzx12", "游戏结束");
+		ld.setIsEnd(1);
 		return true;
 	}
 }

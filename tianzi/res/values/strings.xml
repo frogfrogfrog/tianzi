@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">tianzi</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">Crossword Puzzles</string>
+    <string name="title_activity_main">Crossword Puzzles</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_game">GameActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_game">Crossword Puzzles</string>
+    <string name="title_activity_test">Crossword Puzzles</string>
 
 </resources>
