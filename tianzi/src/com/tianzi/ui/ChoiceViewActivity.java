@@ -1,12 +1,11 @@
 package com.tianzi.ui;
 
 
-import com.example.tianzi.R;
-
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -66,6 +65,16 @@ public class ChoiceViewActivity extends Activity {
 //        	startActivity(intent);
 //}}
     
-    
-    
+    @Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+			Intent intent = new Intent(
+					ChoiceViewActivity.this,
+					MainActivity.class);
+			startActivity(intent);
+			return false;
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+	}
 }

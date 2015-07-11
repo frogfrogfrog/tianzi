@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.tianzi.R;
 
 
 public class Game_keyboard_adapter extends BaseAdapter{

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="fill_parent"
+    android:background="@drawable/homeback">
+    
+    <TextView android:id="@+id/help_textview" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginTop="150px"
+		android:textSize="20dp"
+        android:text="       中文填字游戏中文填字游戏是一种汉字小游戏，在一片纵横相交的格子里，根据出题者给出的片言只语的提示，以及词条相交处的一个或几个“关键字”，猜出正确的词条，然后再根据猜出的词条和制题者给出的提示去推算下一个词条，直至把空格完全填满。">
+    </TextView>
 </LinearLayout>

@@ -1,7 +1,6 @@
 package com.tianzi.ui;
 
 
-import com.example.tianzi.R;
 import com.tianzi.logic.Logic;
 import com.tianzi.logic.LogicImpl;
 
@@ -73,9 +72,9 @@ public class MyAdapter extends BaseAdapter{
 //            R.drawable.level_button1,
     };
     private Integer[] backImgs={
-    		R.drawable.level_back1,
-    		R.drawable.level_back2,
-    		R.drawable.level_back3,
+    		R.drawable.level_back,
+    		R.drawable.level_back,
+    		R.drawable.level_back,
 //    		R.drawable.levelgridback,
 //    		R.drawable.levelgridback,
 //    		R.drawable.levelgridback,

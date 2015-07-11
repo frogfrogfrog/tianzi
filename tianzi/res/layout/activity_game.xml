@@ -20,7 +20,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5sp"
         android:background="@drawable/game_title"
-        android:text="第1关" 
         android:gravity="center"
         />
     

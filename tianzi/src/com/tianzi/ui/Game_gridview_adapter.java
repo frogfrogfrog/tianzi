@@ -2,7 +2,6 @@ package com.tianzi.ui;
 
 import java.util.ArrayList;
 
-import com.example.tianzi.R;
 import com.tianzi.logic.CellData;
 
 import android.content.Context;
